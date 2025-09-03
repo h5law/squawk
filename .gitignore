@@ -1,0 +1,6 @@
+build/
+.ccls-cache/
+.cache/
+*.o
+*.d
+*.a
