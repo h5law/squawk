@@ -1,5 +1,5 @@
-*~
-.swp
+*.un~
+*.swp
 test
 build/
 .ccls-cache/
