@@ -1,8 +1,10 @@
-MAKEFLAGS += --no-builtin-rules --no-builtin-variables
+# $squawk: Makefile
 
-DIAG = -Wall -Wextra -Wpedantic
-#OFLAGS = -O3 -Ofast
-OFLAGS = -O2
+CC ?= clang
+
+DIAG = -Wall -Wextra -pedantic
+#OFLAGS = -O3 -Ofast -pipe
+OFLAGS = -O2 -pipe
 
 CFLAGS ?= $(OFLAGS) $(DIAG)
 CPPFLAGS ?=
@@ -10,27 +12,28 @@ LDFLAGS ?=
 LIBS ?=
 INCS ?=
 
-INCS := -I$(SQUAWK_PATH)/include
-LIBS := -L$(SQUAWK_PATH)/lib -lm -lc
+INCS := -Iinclude
 CFLAGS := $(CFLAGS) $(INCS)
 LDFLAGS := $(LDFLAGS) $(LIBS)
 
-OBJS = \
-	src/main.o
+SRCS = src/main.c
+OBJS = $(SRCS:.c=.o)
 
 TEST = test
 
 .PHONY: all clean test
 
-all: clean test
+all: test
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+$(TEST): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TEST) $(OBJS) $(LDFLAGS)
 
 clean:
 	rm -frd $(TEST)
 	rm -f $(OBJS) *.o */*.o */*/*.o
 	rm -f $(OBJS:.o=.d) *.d */*.d */*/*.d
 
-%.o: %.c
-	$(CC) -MD $(CFLAGS) -o $@ -c $<
-
-$(TEST): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TEST) $(OBJS) $(LDFLAGS)
+# vim: ft=make ts=4 sts=4 sw=4 et ai
