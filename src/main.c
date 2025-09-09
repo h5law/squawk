@@ -1,19 +1,10 @@
-#include <stdio.h>
+/* $squawk: main.c */
 
-#ifndef NO_DEBUG
-#define DEBUG(...)                                                             \
-    do {                                                                       \
-        fprintf(stderr, "%d: %s    ", __LINE__, __FILE__);                     \
-        fprintf(stderr, __VA_ARGS__);                                          \
-    } while (0);
-#else
-#define NO_DEBUG
-#define DEBUG(...)
-#endif
+#include "repl.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
-    for (int i = 0; i < argc; ++i)
-        printf("%s\n", argv[i]);
-    return 0;
+    return repl_echo();
 }
+
+// vim: ft=c ts=4 sts=4 sw=4 et ai cin

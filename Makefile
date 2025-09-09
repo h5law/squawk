@@ -12,11 +12,10 @@ LDFLAGS ?=
 LIBS ?=
 INCS ?=
 
-INCS := -Iinclude
 CFLAGS := $(CFLAGS) $(INCS)
 LDFLAGS := $(LDFLAGS) $(LIBS)
 
-SRCS = src/main.c
+SRCS = src/main.c src/repl.c
 OBJS = $(SRCS:.c=.o)
 
 TEST = test
@@ -29,7 +28,7 @@ all: test
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(TEST): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TEST) $(OBJS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
 clean:
 	rm -frd $(TEST)
