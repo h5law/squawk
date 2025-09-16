@@ -1,10 +1,10 @@
 
 # squawk
 
-A  SQLite3 Reimplementation written in Pure C without any dependencies, from
-scratch. An ambitious project but one that leaves a lot of possibilities
-available to be taken.
+A in memory and persistent databased backed by a B-Tree based on SQLite.
 
 ## SQLite Architecture
 
 ![sqlite architecture <https://www.sqlite.org/arch.html>](https://cstack.github.io/db_tutorial/assets/images/arch2.gif)
+
+The part we are interested in is the backend section which is what the architecture of `squawk` is based upon.
